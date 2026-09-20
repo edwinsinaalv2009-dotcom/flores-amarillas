@@ -1,0 +1,884 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    background:
+        radial-gradient(circle at 50% 30%, #4b174f 0%, #210d2d 45%, #0d0618 100%);
+
+    color: white;
+}
+
+
+/* =====================================
+   FONDO
+===================================== */
+
+.fondo {
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =====================================
+   CORAZONES
+===================================== */
+
+.corazon {
+    position: absolute;
+
+    bottom: -50px;
+
+    width: 20px;
+    height: 20px;
+
+    background: #ff75b5;
+
+    transform: rotate(45deg);
+
+    opacity: 0;
+
+    animation: subirCorazon linear forwards;
+
+    filter: drop-shadow(0 0 8px #ff62aa);
+}
+
+
+.corazon::before,
+.corazon::after {
+    content: "";
+
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    background: inherit;
+
+    border-radius: 50%;
+}
+
+
+.corazon::before {
+    left: -10px;
+}
+
+
+.corazon::after {
+    top: -10px;
+}
+
+
+@keyframes subirCorazon {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(45deg)
+            scale(0.5);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    50% {
+        transform:
+            translateY(-50vh)
+            rotate(135deg)
+            scale(1);
+    }
+
+    100% {
+        transform:
+            translateY(-115vh)
+            rotate(225deg)
+            scale(0.7);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================
+   ESTRELLAS
+===================================== */
+
+.estrella {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px white,
+        0 0 15px #ffd6f3;
+
+    animation: parpadear 2s infinite ease-in-out;
+}
+
+
+@keyframes parpadear {
+
+    0%,
+    100% {
+        opacity: 0.2;
+
+        transform: scale(0.6);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform: scale(1.5);
+    }
+}
+
+
+/* =====================================
+   CONTENEDOR
+===================================== */
+
+.contenedor {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+/* =====================================
+   TITULO
+===================================== */
+
+.titulo {
+
+    font-size: clamp(35px, 7vw, 70px);
+
+    color: #ffe66d;
+
+    text-align: center;
+
+    margin-bottom: 10px;
+
+    text-shadow:
+        0 0 5px #fff,
+        0 0 15px #ffd83d,
+        0 0 30px #ffb700;
+
+    animation: aparecerTitulo 2s ease forwards;
+}
+
+
+.subtitulo {
+
+    font-size: clamp(16px, 3vw, 24px);
+
+    color: #ffd9ed;
+
+    margin-bottom: 25px;
+
+    text-align: center;
+
+    text-shadow: 0 0 10px #ff8fc8;
+}
+
+
+@keyframes aparecerTitulo {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* =====================================
+   DOMO
+===================================== */
+
+.domo {
+
+    position: relative;
+
+    width: min(440px, 90vw);
+
+    height: 430px;
+
+    border-radius: 220px 220px 25px 25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.12),
+            rgba(255,255,255,0.03) 30%,
+            rgba(255,255,255,0.08) 70%,
+            rgba(255,255,255,0.18)
+        );
+
+    border: 2px solid rgba(255,255,255,0.35);
+
+    box-shadow:
+
+        inset 10px 0 25px rgba(255,255,255,0.15),
+
+        inset -10px 0 25px rgba(255,255,255,0.08),
+
+        0 0 30px rgba(255,255,255,0.15);
+
+    overflow: hidden;
+
+    backdrop-filter: blur(2px);
+
+    animation: aparecerDomo 2s ease;
+}
+
+
+@keyframes aparecerDomo {
+
+    from {
+        opacity: 0;
+
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: scale(1);
+    }
+}
+
+
+/* Reflejo del cristal */
+
+.brillo-domo {
+
+    position: absolute;
+
+    top: 15px;
+    left: 50px;
+
+    width: 70px;
+    height: 330px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+
+    transform: rotate(15deg);
+
+    filter: blur(3px);
+
+    z-index: 20;
+}
+
+
+/* =====================================
+   BASE
+===================================== */
+
+.base {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: -5%;
+
+    width: 110%;
+
+    height: 55px;
+
+    background:
+        linear-gradient(
+            #70402a,
+            #3c1f16
+        );
+
+    border-radius: 50% 50% 10px 10px;
+
+    border-top: 5px solid #a86b38;
+
+    box-shadow:
+        0 -5px 20px rgba(0,0,0,0.5);
+}
+
+
+/* =====================================
+   FLORES
+===================================== */
+
+.flores {
+
+    position: absolute;
+
+    bottom: 45px;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 350px;
+}
+
+
+.flor {
+
+    position: absolute;
+
+    bottom: 25px;
+
+    width: 100px;
+
+    height: 300px;
+}
+
+
+.flor1 {
+
+    left: 8%;
+
+    transform: rotate(-7deg);
+}
+
+
+.flor2 {
+
+    left: 39%;
+
+    transform: scale(1.15);
+
+    z-index: 5;
+}
+
+
+.flor3 {
+
+    right: 7%;
+
+    transform: rotate(8deg) scale(0.9);
+}
+
+
+/* =====================================
+   TALLOS
+===================================== */
+
+.tallo {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 48%;
+
+    width: 9px;
+
+    height: 210px;
+
+    background:
+        linear-gradient(
+            to right,
+            #1c6a32,
+            #45a847,
+            #155a2b
+        );
+
+    border-radius: 10px;
+
+    transform-origin: bottom;
+
+    animation: crecerTallo 2s ease;
+}
+
+
+@keyframes crecerTallo {
+
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 210px;
+    }
+}
+
+
+/* =====================================
+   HOJAS
+===================================== */
+
+.hoja {
+
+    position: absolute;
+
+    width: 65px;
+
+    height: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #58b957,
+            #176d31
+        );
+
+    border-radius: 100% 0 100% 0;
+
+}
+
+
+.hoja1 {
+
+    bottom: 95px;
+
+    left: 3%;
+
+    transform: rotate(25deg);
+}
+
+
+.hoja2 {
+
+    bottom: 135px;
+
+    right: -5%;
+
+    transform: rotate(-30deg) scaleX(-1);
+}
+
+
+/* =====================================
+   PÉTALOS
+===================================== */
+
+.petalos {
+
+    position: absolute;
+
+    top: 20px;
+
+    left: 0;
+
+    width: 100px;
+
+    height: 100px;
+
+    animation: balanceo 4s infinite ease-in-out;
+}
+
+
+@keyframes balanceo {
+
+    0%,
+    100% {
+        transform: rotate(-2deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+
+.petalos span {
+
+    position: absolute;
+
+    top: 10px;
+
+    left: 37px;
+
+    width: 27px;
+
+    height: 47px;
+
+    background:
+        linear-gradient(
+            #ffe65b,
+            #ffb900
+        );
+
+    border-radius: 50% 50% 45% 45%;
+
+    transform-origin: 50% 40px;
+
+    box-shadow:
+        0 0 7px rgba(255,215,0,0.6);
+}
+
+
+.petalos span:nth-child(1) {
+    transform: rotate(0deg);
+}
+
+.petalos span:nth-child(2) {
+    transform: rotate(45deg);
+}
+
+.petalos span:nth-child(3) {
+    transform: rotate(90deg);
+}
+
+.petalos span:nth-child(4) {
+    transform: rotate(135deg);
+}
+
+.petalos span:nth-child(5) {
+    transform: rotate(180deg);
+}
+
+.petalos span:nth-child(6) {
+    transform: rotate(225deg);
+}
+
+.petalos span:nth-child(7) {
+    transform: rotate(270deg);
+}
+
+.petalos span:nth-child(8) {
+    transform: rotate(315deg);
+}
+
+
+/* =====================================
+   CENTRO DE LA FLOR
+===================================== */
+
+.centro {
+
+    position: absolute;
+
+    top: 43px;
+
+    left: 35px;
+
+    width: 32px;
+
+    height: 32px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #8c4b00 0%,
+            #633000 60%,
+            #351700 100%
+        );
+
+    z-index: 10;
+
+    box-shadow:
+        inset 0 0 5px #210f00,
+        0 0 5px rgba(0,0,0,0.5);
+}
+
+
+/* =====================================
+   BOTÓN
+===================================== */
+
+.boton {
+
+    margin-top: 30px;
+
+    padding: 15px 30px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd84d,
+            #ffae00
+        );
+
+    color: #542b00;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 15px rgba(255,200,0,0.6);
+
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+}
+
+
+.boton:hover {
+
+    transform: scale(1.08);
+
+    box-shadow:
+        0 0 30px rgba(255,215,0,0.9);
+}
+
+
+.boton:active {
+
+    transform: scale(0.95);
+}
+
+
+/* =====================================
+   CARTA
+===================================== */
+
+.carta-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(10,3,20,0.75);
+
+    backdrop-filter: blur(7px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.5s,
+        visibility 0.5s;
+}
+
+
+.carta-overlay.mostrar {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+.carta {
+
+    position: relative;
+
+    width: min(500px, 95vw);
+
+    padding: 40px 30px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf3,
+            #fff5c7
+        );
+
+    color: #573300;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,0.6);
+
+    transform:
+        translateY(50px)
+        scale(0.7);
+
+    transition:
+        transform 0.6s cubic-bezier(.17,.67,.3,1.3);
+}
+
+
+.mostrar .carta {
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+.carta h2 {
+
+    font-size: 32px;
+
+    margin-bottom: 20px;
+
+    color: #d89000;
+}
+
+
+.carta p {
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+    margin: 12px 0;
+}
+
+
+.sobre {
+
+    font-size: 55px;
+
+    margin-bottom: 10px;
+
+    animation: latido 1.5s infinite;
+}
+
+
+@keyframes latido {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+
+.frase {
+
+    font-weight: bold;
+
+    color: #d18a00;
+}
+
+
+.firma {
+
+    margin-top: 25px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================
+   CERRAR
+===================================== */
+
+.cerrar {
+
+    position: absolute;
+
+    top: 10px;
+
+    right: 15px;
+
+    width: 35px;
+
+    height: 35px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #8b5a00;
+
+    font-size: 32px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================
+   CELULARES
+===================================== */
+
+@media (max-width: 600px) {
+
+    .domo {
+
+        width: 330px;
+
+        height: 350px;
+    }
+
+    .flores {
+
+        transform: scale(0.78);
+
+        transform-origin: bottom center;
+    }
+
+    .boton {
+
+        margin-top: 20px;
+
+        font-size: 16px;
+
+        padding: 13px 25px;
+    }
+
+    .carta {
+
+        padding: 35px 22px;
+    }
+
+    .carta p {
+
+        font-size: 16px;
+    }
+}
